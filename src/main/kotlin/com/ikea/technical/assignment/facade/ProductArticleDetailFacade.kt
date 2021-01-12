@@ -9,7 +9,7 @@ class ProductArticleDetailFacade(
         private val productArticleDetailRepository: ProductArticleDetailRepository
 ) {
 
-    fun findAll(): MutableIterable<ProductArticleDetail> = productArticleDetailRepository.findAll()
+    fun findAll(): List<ProductArticleDetail> = productArticleDetailRepository.findAll().toList()
 
     fun getProductByName(productName: String) = productArticleDetailRepository.findProductByName(productName).toList()
 

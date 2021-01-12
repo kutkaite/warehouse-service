@@ -14,11 +14,11 @@ The software holds:
 
 #### Interact with the software:
 
-* Get all products and quantity of each that is an available with the current inventory.
+* Get all products and quantity of each that is an available with the current inventory:
 
 `curl http://localhost:8080/available-products`
 
-* Remove(Sell) a product and update the inventory accordingly. Only one product type allowed per purchase request.
+* Remove(Sell) a product and update the inventory accordingly. Only one product type allowed per purchase request:
 
 `curl -X POST -H "Content-Type: application/json" -d '{"productName": "Dinning Table", "quantity": 1}' http://localhost:8080/purchase-product`
 

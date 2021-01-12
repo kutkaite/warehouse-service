@@ -25,13 +25,17 @@ class InventoryService(
         }
 
         productsGrouped.forEach { product ->
-            var productAvailability = getMaxProductAvailability(product.key, product.value)
-            productAvailability = if (productAvailability >= 0) productAvailability else 0
-            val productInventory = ProductInventory(
-                    name = product.key,
-                    maxQuantityAvailable = productAvailability,
-                    price = product.value[0].productPrice)
-            productInventoryFacade.save(productInventory)
+            try {
+                val productAvailability = getMaxProductAvailability(product.key, product.value)
+                val productInventory = ProductInventory(
+                        name = product.key,
+                        maxQuantityAvailable = productAvailability,
+                        price = product.value[0].productPrice)
+                productInventoryFacade.save(productInventory)
+            } catch (e: Exception) {
+                LOG.error("Failed to add {} to Product inventory", product.key, e.message)
+                return
+            }
         }
         LOG.info("Product inventory was updated with the latest quantity amounts")
     }

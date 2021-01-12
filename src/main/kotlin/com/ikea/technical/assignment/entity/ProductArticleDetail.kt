@@ -1,12 +1,10 @@
 package com.ikea.technical.assignment.entity
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
+@Table(name = "product_article_detail")
 data class ProductArticleDetail(
         @JsonProperty("art_id")
         val articleId: Int,
@@ -17,7 +15,7 @@ data class ProductArticleDetail(
 ) : InventoryEntity {
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
-        val id: Int? = null
+        val id: Int = 0
 
         constructor():this(-1, -1, "NOT_SET", 00.0)
 }
