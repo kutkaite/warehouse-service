@@ -1,8 +1,8 @@
-FROM maven:3.6.3-openjdk-16-slim
+FROM maven:3.6.3-openjdk-11-slim
 
-ARG JAR_FILE=target/*.jar
+WORKDIR /
 
-WORKDIR /opt/app
-COPY ${JAR_FILE} app.jar
+COPY ./ ./
+RUN mvn clean package
 
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["java","-jar","target/technical-assignment-0.0.1-SNAPSHOT.jar"]

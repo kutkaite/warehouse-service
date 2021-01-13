@@ -8,22 +8,65 @@ The software holds:
 
 #### Build and start Docker container:
 
-`docker build -t inventory_app . `
+Build a jar file and an image `warehouse_app`
+```
+docker build -t warehouse_app . 
+```
 
-`docker run -d -p 8080:8080 -t inventory_app`
+Start the container with the newly built image `warehouse_app`
+
+```
+docker run -d -p 8080:8080 -t warehouse_app
+```
 
 #### Interact with the software:
 
 * Get all products and quantity of each that is an available with the current inventory:
 
-`curl http://localhost:8080/available-products`
+```
+curl http://localhost:8080/available-products | json_pp -json_opt pretty
+```
 
 * Remove(Sell) a product and update the inventory accordingly. Only one product type allowed per purchase request:
 
-`curl -X POST -H "Content-Type: application/json" -d '{"productName": "Dinning Table", "quantity": 1}' http://localhost:8080/purchase-product`
+```
+curl -X POST -H "Content-Type: application/json" -d '{"productName": "Dinning Table", "quantity": 1}' http://localhost:8080/purchase-product | json_pp -json_opt pretty
+```
+
+#### Run tests:
+
+- Find container name
+```
+docker ps
+```
+
+- Get inside the container
+```
+docker exec -it name /bin/sh
+```
+
+- Run tests
+
+```
+mvn test
+```
+
+- Exit the container
+
+```
+exit
+```
 
 #### Stop Docker container:
 
-`docker ps` - to find container id
+Find container id
 
-`docker stop container_id`
+```
+docker ps
+```
+
+Stop the container
+
+```
+docker stop container_id
+```
