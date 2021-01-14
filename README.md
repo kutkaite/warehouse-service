@@ -1,25 +1,44 @@
-## Warehouse Software
+# Warehouse Service
+
+Warehouse service is the functionality related to the product and article inventory operations. 
+The API allows you to integrate for getting all available product inventory and to make sure the
+inventory is update when products are sold.
 
 The software holds:
 * articles which are loaded from inventory.json `src/main/resources/static/inventory.json`
 * products which are loaded from products.json `src/main/resources/static/products.json`
 
-### How to run code locally
+## Built With
 
-#### Build and start Docker container:
+* [Spring Boot](https://spring.io/projects/spring-boot) - Java-based framework
+* [Kotlin](https://kotlinlang.org/) - Programming language
+* [Maven](https://maven.apache.org/) - Dependency Management
+* [H2](https://h2database.com/) - Java SQL database
 
-Build a jar file and an image `warehouse_app`
+## How to run code locally
+
+### Prerequisite
+
+Follow the instructions [here](https://docs.docker.com/get-docker/) to install docker. 
+If you have `Homebrew` installed, simply run 
 ```
-docker build -t warehouse_app . 
+brew install --cask docker
+``` 
+
+### Build and start Docker container:
+
+Build a jar file and an image `warehouse_service`
+```
+docker build -t warehouse_service . 
 ```
 
-Start the container with the newly built image `warehouse_app`
+Start the container with the newly built image `warehouse_service`
 
 ```
-docker run -d -p 8080:8080 -t warehouse_app
+docker run -d -p 8080:8080 -t warehouse_service
 ```
 
-#### Interact with the software:
+### Interact with the software:
 
 * Get all products and quantity of each that is an available with the current inventory:
 
@@ -33,7 +52,7 @@ curl http://localhost:8080/available-products | json_pp -json_opt pretty
 curl -X POST -H "Content-Type: application/json" -d '{"productName": "Dinning Table", "quantity": 1}' http://localhost:8080/purchase-product | json_pp -json_opt pretty
 ```
 
-#### Run tests:
+### Run tests:
 
 - Find container name
 ```
@@ -57,7 +76,7 @@ mvn test
 exit
 ```
 
-#### Stop Docker container:
+### Stop Docker container:
 
 Find container id
 

@@ -5,4 +5,4 @@ WORKDIR /
 COPY ./ ./
 RUN mvn clean package
 
-ENTRYPOINT ["java","-jar","target/technical-assignment-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","target/warehouse-service-1.0.0-SNAPSHOT.jar"]
